@@ -1,35 +1,35 @@
-### EnergyHub Coding Challenge
+# EnergyHub Coding Challenge
 
 ## Install/Setup
 
-# Requirements
+### Requirements
 
-# Install
+### Install
 
-# Run -> Help
+### Run -> Help
 
 ## Usage
 
-# Options
+### Options
 
-# Arguments
+### Arguments
 
-# General Functionality 
+### General Functionality 
 
-# Help
+### Help
 
-# Additional Functionality
+### Additional Functionality
 
 ## Testing 
 
-# Running unittests
+### Running unittests
 
-# Whats being tested?
+### Whats being tested?
 
 ## Helpful resources/literature
 
-# Why I used Click 
+### Why I used Click 
 
-Docopt vs argparse 
+### Docopt vs argparse 
 
-## Color mode?
+### Color mode?
