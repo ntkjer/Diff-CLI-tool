@@ -28,6 +28,9 @@ def check_extension(filepath):
         filepath = make_file_from_time(timestamp, filepath)
     return filepath
 
+def is_data_empty(data):
+    return len(data) == 0
+
 
 def handle_input_date(date):
     if date == "--help":

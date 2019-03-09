@@ -56,15 +56,10 @@ def cli(field, path, timestamp):
     |..................................................................|\n
     |__________________________________________________________________|\n
     """
-    #TODO: 
-    # -remove logical evals and create helper functions
-    # -remove string checking and create helper func
-    # -> 
-    # if ".gz" not in path:
-    #     path = make_file_from_time(timestamp, path)
     path = check_extension(path)
     data = get_boundary_data(timestamp, path)
-    if len(data) == 0:
+    empty = is_data_empty(data)
+    if empty:
         click.echo("404 Not Found")
         sys.exit(1)
     else:
