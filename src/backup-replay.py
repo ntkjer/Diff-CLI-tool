@@ -1,4 +1,4 @@
-import click
+2import click
 
 from click_datetime import Datetime
 from click_flexpath import Flexpath

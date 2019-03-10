@@ -17,7 +17,7 @@ class Flexpath(click.ParamType):
     def setPath(self, path):
         self.path = path
 
-
+        # TODO Take out hardcoded path
     def convert(self, path, param, ctx):
         try:
             if path == '/tmp/ehub_data':

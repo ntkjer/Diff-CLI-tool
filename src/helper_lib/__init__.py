@@ -23,7 +23,7 @@ def download_S3(link, path='/tmp/ehub_data/'):
         print "404 Not Found"
         sys.exit(1)
 
-def check_extension(filepath):
+def check_extension(timestamp, filepath):
     if ".gz" not in filepath:
         filepath = make_file_from_time(timestamp, filepath)
     return filepath
@@ -33,7 +33,8 @@ def is_data_empty(data):
 
 
 def handle_input_date(date):
-    if date == "--help":
+    options = ["--help", "-h", "help"]
+    if date in options:
         date = None
     return date
 
@@ -51,8 +52,7 @@ def validate_date(date, format):
         pass
 
 
-#-rename this from build_state to ???
-def build_state(data, timestamp):
+def filter_state(data, timestamp):
     result = {}
     result['state'] = {}
     for k, v in data.iteritems():
