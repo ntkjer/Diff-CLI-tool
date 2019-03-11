@@ -8,6 +8,7 @@ from click.testing import CliRunner
 
 class TestReplay(unittest.TestCase):
 
+
     def setUp(self):
         self.runner = CliRunner()
         self.expected_output = ""
@@ -26,6 +27,13 @@ class TestReplay(unittest.TestCase):
         self.assertIn("SYNOPSIS", result.output)
         self.assertIn("DESCRIPTION", result.output)
         self.assertIn("EXAMPLES", result.output)
+        result = runner.invoke(
+            cli,
+            ["-h"]
+        )
+        self.assertEqual(2, result.exit_code)
+        self.expected_output="Error: no such option: -h"
+        self.assertIn(self.expected_output, result.output)
 
 
     def test_replay_input_args(self):
@@ -139,7 +147,15 @@ class TestReplay(unittest.TestCase):
         self.expected_output = 'Error: no such option:'
         self.assertIn(self.expected_output, result.output)
 
-  
+        result = runner.invoke(
+            cli,
+            ['-f']
+        )
+        self.assertEqual(2, result.exit_code)
+        self.expected_output = 'Error: -f option requires an argument'
+        self.assertIn(self.expected_output, result.output)
+
+
     def test_replay_s3(self):
         runner = self.runner
 
@@ -241,3 +257,4 @@ class TestReplay(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+    
