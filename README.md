@@ -85,6 +85,12 @@ We can also download straight from s3. Note: this link will only work for `s3://
 $ replay --field ambientTemp --field schedule s3://net.energyhub.assets/public/dev-exercises/audit-data/ 2016-01-01T03:00
 >>{"state": {"ambientTemp": 77.0, "schedule": false}, "ts": "2016-01-01T03:00:00"}
 ```
+
+The command will return a 404 not found if the s3 link is invalid:
+```
+$ replay --field ambientTemp --field schedule s3://net.energyhub.assets/public/dev-exercises/fakepath/ 2016-01-01T03:00
+>>404 not found
+```
 Downloading for s3 is assumed to be a **very** expensive opereation. 
 To mediate this, we check if the data is available locally in /tmp/ehub_data before initiating a download.
 We also use Python's built-in LRU cache for a performance boost. 

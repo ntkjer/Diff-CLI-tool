@@ -215,9 +215,7 @@ class TestReplay(unittest.TestCase):
             ['--field', 'ambientTemp', '--field', 'schedule', 's3://net.energyhub.assets/public/dev-exercises/audit-data/but/the/path/is/wrong', '2016-01-01T03:00']
         )
         self.assertEqual(0, result.exit_code)
-        self.expected_output = "Invalid entry"
-        self.assertIn(self.expected_output, result.output)
-        self.expected_output = "Usage: replay --help"
+        self.expected_output = "404" 
         self.assertIn(self.expected_output, result.output)
 
         result = runner.invoke(
@@ -228,6 +226,14 @@ class TestReplay(unittest.TestCase):
         self.expected_output = "Invalid entry"
         self.assertIn(self.expected_output, result.output)
         self.expected_output = "Usage: replay --help"
+        self.assertIn(self.expected_output, result.output)
+
+        result = runner.invoke(
+            cli,
+            ['--field', 'ambientTemp', '--field', 'schedule', 's3://net.energyhub.assets/public/dev-exercises/fakepath', '2016-01-01T03:00']
+        )
+        self.assertEqual(0, result.exit_code)
+        self.expected_output = "404"
         self.assertIn(self.expected_output, result.output)
 
         result = runner.invoke(
@@ -253,6 +259,8 @@ class TestReplay(unittest.TestCase):
         self.assertEqual(2, result.exit_code)
         self.expected_output = 'Error: no such option:'
         self.assertIn(self.expected_output, result.output)
+
+
 
 
 if __name__ == "__main__":

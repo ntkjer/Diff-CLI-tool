@@ -5,7 +5,6 @@ from click_flexpath import Flexpath
 from helper_lib import *
 
 
-#CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help', 'help'])
 OPTION_FIELDS = ['schedule', 'ambientTemp', 'heatTemp']
 
 @click.command(options_metavar='<options>',
