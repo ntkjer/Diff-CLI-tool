@@ -18,6 +18,7 @@ Here's what our directory layout looks like:
 .
 ├── README.md
 ├── install.sh
+├── test-all.sh
 └── src
     ├── Replay.egg-info
     │   ├── PKG-INFO
