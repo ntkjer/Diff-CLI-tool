@@ -1,5 +1,0 @@
-Click
-Werkzeug
-jsonlines
-functools32
-requests

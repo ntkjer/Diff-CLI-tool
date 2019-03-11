@@ -1,6 +1,6 @@
 # EnergyHub Coding Challenge
 
-## Install/Setup
+## Setup
 To install our required packages we will use the `install.sh` script.
 
 ### Requirements
@@ -59,13 +59,13 @@ replay --field/-f [a_valid_field] /tmp/ehub_data timestamp
 ### One field
 ```
 $ replay --field ambientTemp /tmp/ehub_data 2016-01-01T03:00
->>> 
+>>{"timestamp": "2016-01-01T03:00:00", "state": {"ambientTemp": 77.0}}
 ```
 ### Multiple fields
 We can specify as many fields as we need. A shortened version of the flag (-f) also available:
 ```
 $ replay --field ambientTemp -f schedule --field heatTemp /tmp/ehub_data 2016-01-01T03:00
->>> 
+>> {"timestamp": "2016-01-01T03:00:00", "state": {"heatTemp": "false", "ambientTemp": 77.0, "schedule": "false"}}
 ```
 If a field doesn't exist in the diff, we mark it as false in our return object.
 
@@ -80,7 +80,7 @@ $ replay --field ambientTemp --field schedule s3://net.energyhub.assets/public/d
 ```
 Downloading for s3 is assumed to be a **very** expensive opereation. 
 To mediate this, we check if the data is available locally in /tmp/ehub_data before initiating a download.
-We also use Python's built-in LRU cache for a performance boost in the case that we need to initiate a download. 
+We also use Python's built-in LRU cache for a performance boost. 
 
 ### Help
 Helpful details are also available by using the `--help` option.
@@ -88,10 +88,15 @@ Helpful details are also available by using the `--help` option.
 $ replay --help
 ```
 
-
-### Additional Functionality
-
 ## Running unittests
-We can run unittests by using the `run-tests.sh` script.
+We can run unittests by using the `test-all.sh` script.
+General functionality is tested in `test_replay/test.py` and helper methods are tested in `test_helper_lib/test.py`
+We can test either our helper library or replay package separately via the `test-helpers.sh` and `test-replay.sh` scripts.\n
+
 
 ## Helpful resources/literature
+Click Documentation. \n
+Click testing. \n
+functools32. \n
+
+

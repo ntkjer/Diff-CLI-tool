@@ -6,4 +6,5 @@ source $PWD/venv/bin/activate
 echo "activated virtualenv"
 cd $PWD/src/
 pip install --editable .
+deactivate
 echo "successfully installed replay"
