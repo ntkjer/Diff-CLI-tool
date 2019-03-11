@@ -37,13 +37,13 @@ def cli(field, path, timestamp):
         replay infers the state from diffs in the EnergyHub dataset.\n
         The dataset can be retrieved either through local path specification, or by specifying an s3 link. \n
     \n
-        The first synopsis option details the general appraoch to usage. We can indicate each field with --field or -f, following the field name of choice. \n
-        The number of fields do not matter, and we can specify as many as we need. However, please be mindful of the fields available to you.\n
-        Available fields can be seen at the bottom of this doc, specified as "Options".\n
+        The first synopsis option details the general approach to usage. We can indicate each field with --field or -f, following the field name of choice. \n
+        The number of fields do not matter, and you can use as many as you need. However, please be mindful of the fields available to the user.\n
+        Available fields can be seen at the bottom of this doc, specified as "Options".
     \n
-        Required arguments are path and timestamp.
-        Path can be specified as either a local path or s3 link. The s3 link expects the exact link specified in the example. 
-        Timestamp is required to be specified at the tail of the command.
+        Required arguments are path and timestamp.\n
+        Path can be specified as either a local path or s3 link. The s3 link expects the exact link specified in the example. \n
+        Timestamp is required to be positioned at the tail of the command.\n
     \b
     EXAMPLES:\n
         $replay --field ambientTemp --field schedule /tmp/ehub_data 2016-01-01T03:00\n

@@ -117,9 +117,10 @@ OK
 Done
 ```
 
-## Helpful resources/literature
-Click Documentation. 
-Click testing. 
-functools32. 
+## Helpful links, related literature
+[Click Documentation.](https://click.palletsprojects.com/en/7.x/)
+[Click testing.](http://click.palletsprojects.com/en/7.x/testing/)
+[functools32 backporting initative.](https://github.com/michilu/python-functools32)
+[Datetime class reference.](github.com/click-contrib/click-datetime/)
 
 
