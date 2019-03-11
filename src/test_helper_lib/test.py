@@ -25,32 +25,8 @@ class TestHelperLib(unittest.TestCase):
         self.expected_local_path = '/tmp/ehub_data/'
 
 
-        #clear_local_directory(self.expected_local_path)
-
-
-    # def tearDown(self):
-    #     clear_local_directory(self.expected_local_path)
-
-
     def test_download_S3(self):
         self.assertEqual(download_S3('s3://net.energyhub.assets/public/dev-exercises/audit-data/'), self.expected_local_path)
-
-
-
-    def test_build_state(self):
-        pass
-
-
-    def test_get_state(self):
-        pass
-
-
-    def test_retrieve_fields(self):
-        pass
-
-
-    def test_select_closest_bound(self):
-        pass
 
 
     def test_make_dir(self):
