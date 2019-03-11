@@ -56,7 +56,7 @@ def cli(field, path, timestamp):
     data = get_boundary_data(timestamp, path)
     empty = is_data_empty(data)
     if empty:
-        click.echo("=========Invalid entry========")
+        click.echo("****Invalid entry****")
         click.echo("Usage: replay --help")
     else:
         key = select_closest_bound(data)

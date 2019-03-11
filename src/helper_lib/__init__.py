@@ -2,7 +2,6 @@ import functools32, sys, json, jsonlines, gzip, ast, os, subprocess, click, urll
 import datetime as dt
 
 
-#from requests.exceptions import HTTPError
 from datetime import datetime
 from subprocess import Popen, PIPE, call
 
@@ -44,7 +43,6 @@ def download_S3(link, path='/tmp/ehub_data/'):
     except urllib2.HTTPError as e: 
         raise e
         sys.exit(1)
-
 
 
 def handle_input_date(date):

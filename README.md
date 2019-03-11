@@ -1,6 +1,10 @@
 # EnergyHub Coding Challenge
 
 ## Install/Setup
+To install the packages, we run the `install.sh` script.
+```
+$ ./install.sh
+```
 
 ### Requirements
 
