@@ -69,8 +69,14 @@ $ replay --field ambientTemp -f schedule --field heatTemp /tmp/ehub_data 2016-01
 ```
 If a field doesn't exist in the diff, we mark it as false in our return object.
 
+### Arguments 
+For `path` replay requires the input path to be /tmp/ehub_data or an s3 link.\n
+For `timestamp` replay requires the input timestamp to be in the format `%Y-%M-%dT%H%m`, such as: `2016-01-01T03:00`.
+Where Y is year, M is month, d is day, T (splitter), H is hour, and m is minutes.
+
 ### Fields
 Available fields are heatTemp, ambientTemp, and schedule.
+
 
 ### S3
 We can also download straight from s3. Note: this link will only work for `s3://net.energyhub.assets/public/dev-exercises/audit-data/`
