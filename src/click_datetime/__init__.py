@@ -3,6 +3,7 @@ import click
 from datetime import datetime
 from helper_lib import handle_input_date
 
+
 class Datetime(click.ParamType):
     '''
     Creates a datetime object parsed via datatime.strptime.

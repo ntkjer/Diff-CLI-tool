@@ -1,9 +1,9 @@
 import functools32, sys, json, jsonlines, gzip, ast, os, subprocess, click, urllib2
 import datetime as dt
 
-
 from datetime import datetime
 from subprocess import Popen, PIPE, call
+
 
 
 def get_date(input=sys.argv[-1]):
@@ -34,7 +34,6 @@ def download_S3(link, path='/tmp/ehub_data/'):
     try:
         link = link[:-1]
         extension = '.tar.gz'
-        #filename = path + '/' + 'audit-data.tar.gz'
         filename = path + 'audit-data.tar.gz'
         process = subprocess.Popen('mkdir '+ path + ' && cd ' + path, shell=True, stdout=subprocess.PIPE).wait()
         process = subprocess.Popen('aws s3 cp ' + link + extension + ' ' + path, shell=True, stdout=subprocess.PIPE).wait()
