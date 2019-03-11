@@ -1,4 +1,13 @@
-import functools32, sys, json, jsonlines, gzip, ast, os, subprocess, click, urllib2
+import functools32 
+import sys 
+import json
+import jsonlines 
+import gzip 
+import ast 
+import os 
+import subprocess 
+import click 
+import urllib2
 import datetime as dt
 
 from datetime import datetime
