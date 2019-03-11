@@ -1,13 +1,14 @@
 import click
 import os.path
 
-from werkzeug import abort
 from helper_lib import *
 
 
 class Flexpath(click.ParamType):
-
-    name = 'path_string'
+    '''
+    Handles path objects for our command line interface. Flexpath allows a local path or s3 link destination as input.
+    '''
+    name = 'path'
 
     def __init__(self, date):
         self.date = date
@@ -17,7 +18,7 @@ class Flexpath(click.ParamType):
     def setPath(self, path):
         self.path = path
 
-        # TODO Take out hardcoded path
+
     def convert(self, path, param, ctx):
         try:
             if path == '/tmp/ehub_data':
@@ -35,7 +36,7 @@ class Flexpath(click.ParamType):
             else:
                 return path
         except:
-            abort(404)
+            raise 
 
 
     def getLocalPath(self):
