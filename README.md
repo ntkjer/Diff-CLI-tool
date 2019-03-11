@@ -1,11 +1,11 @@
 # EnergyHub Coding Challenge
-Thanks for checking out my program! It was a blast to work on and I really liked working with the EnergyHub dataset sample. Hope you all enjoy my solution! :octocat:
+Thanks for checking out my program! It was a blast to work on and I really liked working with EnergyHub's data. Hope you all enjoy my solution! :octocat:
 
 ## Setup
-To install our required packages we will use the `install.sh` script.
+To install our required packages we will use the `install.sh` script. This will install everything we need, including the energy_hub data in `/tmp/ehub_data`
 
 ### Requirements
-This installation requires `python 2.7`, `pip`, as well as `virtualenv` on the local machine.
+This installation requires `python 2.7`, `pip`, as well as `virtualenv` on the local machine. 
 
 ### Install
 ```
