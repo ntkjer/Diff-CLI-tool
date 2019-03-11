@@ -11,6 +11,9 @@ class TestReplay(unittest.TestCase):
     def setUp(self):
         self.runner = CliRunner()
         self.expected_output = ""
+        self.s3_link = "s3://net.energyhub.assets/public/dev-exercises/audit-data/"
+        self.local_path = '/tmp/ehub_data'
+
 
     def test_replay_help(self):
         runner = self.runner
@@ -135,13 +138,12 @@ class TestReplay(unittest.TestCase):
         self.assertEqual(2, result.exit_code)
         self.expected_output = 'Error: no such option:'
         self.assertIn(self.expected_output, result.output)
-        #Use different fields
 
   
     def test_replay_s3(self):
         runner = self.runner
 
-        clear('/tmp/ehub_data')
+        clear(self.local_path)
         result = runner.invoke(
             cli,
             ['--field', 'ambientTemp', '--field', 'schedule', 's3://net.energyhub.assets/public/dev-exercises/audit-data/', '2016-01-01T03:00']
@@ -217,7 +219,7 @@ class TestReplay(unittest.TestCase):
             ['--field', 'smell', 's3://net.energyhub.assets/public/dev-exercises/audit-data/', '2016-01-01T03:00']
         )
         self.assertEqual(2, result.exit_code)
-        self.expected_output = 'Error: Invalid value for "--field" / "-f": invalid choice: smell. (choose from schedule, ambientTemp, heatTemp)'
+        self.expected_output = 'Error: Invalid value for "--field" / "-f": invalid choice: smell. (choose from'
         self.assertIn(self.expected_output, result.output)
 
         result = runner.invoke(
@@ -235,7 +237,6 @@ class TestReplay(unittest.TestCase):
         self.assertEqual(2, result.exit_code)
         self.expected_output = 'Error: no such option:'
         self.assertIn(self.expected_output, result.output)
-        #Use different fields
 
 
 if __name__ == "__main__":
