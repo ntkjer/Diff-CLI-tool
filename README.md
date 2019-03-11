@@ -1,4 +1,5 @@
 # EnergyHub Coding Challenge
+Thanks for checking out my program! It was a blast to work on and I really liked working with the EnergyHub dataset sample. Hope you all enjoy my solution! :octocat:
 
 ## Setup
 To install our required packages we will use the `install.sh` script.
