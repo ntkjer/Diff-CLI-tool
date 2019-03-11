@@ -1,8 +1,5 @@
 import unittest
-import click_datetime
 import datetime as dt
-import shutil
-import urllib2
 
 from datetime import datetime
 from helper_lib import *
