@@ -77,7 +77,6 @@ Where Y is year, M is month, d is day, T (splitter), H is hour, and m is minutes
 ### Fields
 Available fields are heatTemp, ambientTemp, and schedule.
 
-
 ### S3
 We can also download straight from s3. Note: this link will only work for `s3://net.energyhub.assets/public/dev-exercises/audit-data/`
 ```
@@ -96,13 +95,30 @@ $ replay --help
 
 ## Running unittests
 We can run unittests by using the `test-all.sh` script.
-General functionality is tested in `test_replay/test.py` and helper methods are tested in `test_helper_lib/test.py`
-We can test either our helper library or replay package separately via the `test-helpers.sh` and `test-replay.sh` scripts.\n
+```
+$ chmod +x test-all.sh
+$ ./test-all.sh
+>>
+Activated virtualenv
+Testing replay
+....
+----------------------------------------------------------------------
+Ran 4 tests in 2.326s
 
+OK
+Testing helper_lib
+..mkdir: /tmp/ehub_data/: File exists
+...........
+----------------------------------------------------------------------
+Ran 13 tests in 2.041s
+
+OK
+Done
+```
 
 ## Helpful resources/literature
-Click Documentation. \n
-Click testing. \n
-functools32. \n
+Click Documentation. 
+Click testing. 
+functools32. 
 
 
