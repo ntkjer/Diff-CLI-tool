@@ -219,4 +219,8 @@ def clear_local_file(path):
     if os.path.exists(path):
         subprocess.call(["rm", "-rf", path])
 
+def is_s3_link(link):
+    if "s3" in link:
+        return True
+    return False
 

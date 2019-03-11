@@ -52,12 +52,16 @@ def cli(field, path, timestamp):
         >>{"state": {"ambientTemp": 77.0, "schedule": false}, "ts": "2016-01-01T03:00:00"}
     \b
     """
+    is_s3 = is_s3_link(path)
     path = check_extension(timestamp, path)
     data = get_boundary_data(timestamp, path)
     empty = is_data_empty(data)
     if empty:
-        click.echo("****Invalid entry****")
-        click.echo("Usage: replay --help")
+        if is_s3:
+            click.echo("404 not found")
+        else:
+            click.echo("****Invalid entry****")
+            click.echo("Usage: replay --help")
     else:
         key = select_closest_bound(data)
         result = get_state(key, data, field)
