@@ -1,40 +1,60 @@
-import functools32, sys, json, jsonlines, gzip, ast, os, subprocess, click
-from requests.exceptions import HTTPError
-
-
-from datetime import datetime
-from subprocess import Popen, PIPE, call
+import functools32, sys, json, jsonlines, gzip, ast, os, subprocess, click, urllib2
 import datetime as dt
 
 
+#from requests.exceptions import HTTPError
+from datetime import datetime
+from subprocess import Popen, PIPE, call
 
 
-@functools32.lru_cache(maxsize=128)
-def download_S3(link, path='/tmp/ehub_data/'):
-    try:
-        link = link[:-1]
-        db_extension = '.tar.gz'
-        filename = path + '/' + 'audit-data.tar.gz'
-        process = subprocess.Popen('mkdir '+ path + ' && cd ' + path, shell=True, stdout=subprocess.PIPE).wait()
-        process = subprocess.Popen('aws s3 cp ' + link + db_extension + ' ' + path, shell=True, stdout=subprocess.PIPE).wait()
-        subprocess.call(["tar", "xzf", filename, "-C", path])
-        return path
-    except requests.exceptions.HTTPError as err:
-        print "404 Not Found"
-        sys.exit(1)
+def get_date(input=sys.argv[-1]):
+    if is_date(input):
+        return input
+
+
+def does_path_exist(path):
+    return os.path.exists(path)
+
+
+def is_data_empty(data):
+    return len(data) == 0
+
 
 def check_extension(timestamp, filepath):
     if ".gz" not in filepath:
         filepath = make_file_from_time(timestamp, filepath)
     return filepath
 
+
 def is_data_empty(data):
     return len(data) == 0
 
 
+@functools32.lru_cache(maxsize=128)
+def download_S3(link, path='/tmp/ehub_data/'):
+    try:
+        link = link[:-1]
+        extension = '.tar.gz'
+        #filename = path + '/' + 'audit-data.tar.gz'
+        filename = path + 'audit-data.tar.gz'
+        process = subprocess.Popen('mkdir '+ path + ' && cd ' + path, shell=True, stdout=subprocess.PIPE).wait()
+        process = subprocess.Popen('aws s3 cp ' + link + extension + ' ' + path, shell=True, stdout=subprocess.PIPE).wait()
+        subprocess.call(["tar", "xzf", filename, "-C", path])
+        return path
+    except urllib2.HTTPError as e: 
+        raise e
+        sys.exit(1)
+
+
+
 def handle_input_date(date):
-    options = ["--help", "-h", "help"]
+    options = ["--help", "-h"]
+    estimated_length = 45
+    if type(date) != str:
+        date = None
     if date in options:
+        date = None
+    if len(sys.argv) < estimated_length:
         date = None
     return date
 
@@ -48,8 +68,6 @@ def validate_date(date, format):
         except ValueError as e:
             click.echo('Could not parse datetime string "{datetime_str}" formatted as {format} ({e})'.format(
                     datetime_str=date, format=format, e=e))
-    else:
-        pass
 
 
 def filter_state(data, timestamp):
@@ -85,7 +103,7 @@ def retrieve_fields(field, input, option):
 def select_closest_bound(data):
     minimum = min(data['low_delta'], data['high_delta'])
     result = ""
-    for k,v in data.iteritems():
+    for k, v in data.iteritems():
         if v == minimum:
             if k == "high_delta":
                 result = "high"
@@ -147,23 +165,24 @@ def does_file_exist(timestamp):
 def get_boundary_data(timestamp, path, form='%Y-%m-%dT%H:%M:%S.%f'):
     low = high = dt.timedelta(hours=100)
     d = {}
-    if does_file_exist(timestamp) == True:
-        with gzip.open(path) as fin:
-            for line in fin:
-                data = json.loads(line)
-                current_time = datetime.strptime(data['changeTime'], form)
-                if current_time > timestamp:
-                    delta = current_time - timestamp
-                    if delta <= high:
-                        high = delta 
-                        d['high'] = line
-                        d['high_delta'] = delta
-                else:
-                    delta = timestamp - current_time
-                    if delta <= low:
-                        low = delta
-                        d['low'] = line
-                        d['low_delta'] = delta
+    if does_path_exist(path) == True:
+        if does_file_exist(timestamp) == True:
+            with gzip.open(path) as fin:
+                for line in fin:
+                    data = json.loads(line)
+                    current_time = datetime.strptime(data['changeTime'], form)
+                    if current_time > timestamp:
+                        delta = current_time - timestamp
+                        if delta <= high:
+                            high = delta 
+                            d['high'] = line
+                            d['high_delta'] = delta
+                    else:
+                        delta = timestamp - current_time
+                        if delta <= low:
+                            low = delta
+                            d['low'] = line
+                            d['low_delta'] = delta
     return d
 
 
@@ -188,5 +207,10 @@ def sanitize_integer(value):
         value = str(value)
         result = '0' + value
     return result
+
+
+def clear_local_file(path):
+    if os.path.exists(path):
+        subprocess.call(["rm", "-rf", path])
 
 

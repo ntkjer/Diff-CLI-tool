@@ -30,7 +30,6 @@ class Flexpath(click.ParamType):
                     self.setPath(download_path)
                     return download_path
                 else:
-                    print localPath
                     self.setPath(localPath)
                     return localPath
             else:

@@ -56,8 +56,8 @@ def cli(field, path, timestamp):
     data = get_boundary_data(timestamp, path)
     empty = is_data_empty(data)
     if empty:
-        click.echo("404 Not Found")
-        sys.exit(1)
+        click.echo("=========Invalid entry========")
+        click.echo("Usage: replay --help")
     else:
         key = select_closest_bound(data)
         result = get_state(key, data, field)
@@ -65,11 +65,6 @@ def cli(field, path, timestamp):
         click.echo(json.dumps(output))
 
 
-
-# @click.command(context_settings=CONTEXT_SETTINGS)
-# def cli():
-
-#     pass
   
 
  
