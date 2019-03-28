@@ -1,5 +1,5 @@
-# EnergyHub Coding Challenge
-Thanks for checking out my program! It was a blast to work on and I really liked working with EnergyHub's data. Hope you all enjoy my solution! :octocat:
+# Info
+:octocat:
 
 ## Setup
 To install our required packages we will use the `install.sh` script. This will install everything we need, including the energy_hub data in `/tmp/ehub_data`
